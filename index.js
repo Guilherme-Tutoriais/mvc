@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars');
 const port = 3000;
 const app = express();
 const conn = require('./db/conn');
+const Task = require('./models/Task');
 
 app.engine('handlebars', exphbs.engine());
 app.set('view engine', 'handlebars');
@@ -15,6 +16,13 @@ app.use(
 app.use(express.json());
 app.use(express.static('public'));
 
-app.listen(port, () => {
-    console.log(`ouvindo porta ${port}`);
-});
+conn
+    .sync()
+    .then(() => {
+        app.listen(port, () => {
+            console.log(`escutando na porta ${port}`);
+        });
+    })
+    .catch((err) => {
+        console.log(err);
+    });
