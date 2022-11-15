@@ -4,6 +4,7 @@ const port = 3000;
 const app = express();
 const conn = require('./db/conn');
 const Task = require('./models/Task');
+const tasksRouter = require('./routes/tasksRoutes');
 
 app.engine('handlebars', exphbs.engine());
 app.set('view engine', 'handlebars');
@@ -15,6 +16,7 @@ app.use(
 );
 app.use(express.json());
 app.use(express.static('public'));
+app.use('/tasks', tasksRouter);
 
 conn
     .sync()
