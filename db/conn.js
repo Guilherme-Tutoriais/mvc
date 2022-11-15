@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize');
 
 //senha vazia
-const sequelize = new Sequelize("nodemvc2", 'root', '', {
+const sequelize = new Sequelize("nodemvc2", 'nodeuser', 'nodepassword', {
     host: 'localhost',
     dialect: 'mysql'
 });
